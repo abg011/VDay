@@ -1,0 +1,473 @@
+/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #ff6b9d 0%, #ff8a80 25%, #ffc1e3 50%, #ff6b9d 75%, #c44569 100%);
+    background-size: 400% 400%;
+    animation: gradientShift 15s ease infinite;
+    overflow-x: hidden;
+}
+
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Floating Hearts Animation */
+.floating-hearts {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+}
+
+.heart {
+    position: absolute;
+    font-size: 24px;
+    animation: floatUp 6s ease-in-out infinite;
+    opacity: 0.7;
+}
+
+.heart:nth-child(1) { left: 5%; animation-delay: 0s; animation-duration: 8s; }
+.heart:nth-child(2) { left: 15%; animation-delay: 1s; animation-duration: 7s; }
+.heart:nth-child(3) { left: 25%; animation-delay: 2s; animation-duration: 9s; }
+.heart:nth-child(4) { left: 35%; animation-delay: 0.5s; animation-duration: 6s; }
+.heart:nth-child(5) { left: 50%; animation-delay: 1.5s; animation-duration: 8s; }
+.heart:nth-child(6) { left: 65%; animation-delay: 3s; animation-duration: 7s; }
+.heart:nth-child(7) { left: 75%; animation-delay: 2.5s; animation-duration: 9s; }
+.heart:nth-child(8) { left: 85%; animation-delay: 0.8s; animation-duration: 6s; }
+.heart:nth-child(9) { left: 92%; animation-delay: 1.8s; animation-duration: 8s; }
+.heart:nth-child(10) { left: 45%; animation-delay: 3.5s; animation-duration: 7s; }
+
+@keyframes floatUp {
+    0% {
+        transform: translateY(100vh) rotate(0deg) scale(1);
+        opacity: 0;
+    }
+    10% {
+        opacity: 0.7;
+    }
+    90% {
+        opacity: 0.7;
+    }
+    100% {
+        transform: translateY(-100vh) rotate(360deg) scale(0.5);
+        opacity: 0;
+    }
+}
+
+/* Container */
+.container {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    position: relative;
+    z-index: 1;
+}
+
+/* Main Card Styles */
+.main-card {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 30px;
+    padding: 60px 50px;
+    text-align: center;
+    box-shadow: 
+        0 25px 80px rgba(196, 69, 105, 0.3),
+        0 10px 40px rgba(255, 107, 157, 0.2),
+        inset 0 0 60px rgba(255, 193, 227, 0.3);
+    max-width: 500px;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    animation: cardFloat 3s ease-in-out infinite;
+}
+
+@keyframes cardFloat {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+.main-card::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+        45deg,
+        transparent 40%,
+        rgba(255, 255, 255, 0.8) 50%,
+        transparent 60%
+    );
+    animation: shimmer 3s infinite;
+}
+
+@keyframes shimmer {
+    0% { transform: translateX(-100%) rotate(45deg); }
+    100% { transform: translateX(100%) rotate(45deg); }
+}
+
+.title {
+    font-family: 'Dancing Script', cursive;
+    font-size: 3rem;
+    color: #c44569;
+    margin-bottom: 15px;
+    position: relative;
+    z-index: 1;
+    text-shadow: 2px 2px 4px rgba(196, 69, 105, 0.2);
+}
+
+.subtitle {
+    font-size: 1.1rem;
+    color: #ff6b9d;
+    margin-bottom: 40px;
+    position: relative;
+    z-index: 1;
+}
+
+/* Button Styles */
+.buttons {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+    position: relative;
+    z-index: 1;
+}
+
+.btn {
+    padding: 18px 40px;
+    font-size: 1.2rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    font-family: 'Poppins', sans-serif;
+}
+
+.btn-yes {
+    background: linear-gradient(135deg, #ff6b9d 0%, #ff8a80 100%);
+    color: white;
+    box-shadow: 0 8px 25px rgba(255, 107, 157, 0.4);
+}
+
+.btn-omg {
+    background: linear-gradient(135deg, #c44569 0%, #ff6b9d 100%);
+    color: white;
+    box-shadow: 0 8px 25px rgba(196, 69, 105, 0.4);
+}
+
+.btn:hover {
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: 0 15px 40px rgba(255, 107, 157, 0.5);
+}
+
+.btn:active {
+    transform: translateY(-2px) scale(1.02);
+}
+
+.heart-burst {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    font-size: 2rem;
+    pointer-events: none;
+}
+
+.btn:hover .heart-burst {
+    animation: burst 0.6s ease-out forwards;
+}
+
+@keyframes burst {
+    0% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(0);
+    }
+    100% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(3);
+    }
+}
+
+/* Cards Page Styles */
+.cards-page {
+    padding-bottom: 50px;
+}
+
+.cards-container {
+    flex-direction: column;
+    align-items: center;
+    padding-top: 40px;
+}
+
+.page-title {
+    font-family: 'Dancing Script', cursive;
+    font-size: 3rem;
+    color: white;
+    text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.2);
+    margin-bottom: 10px;
+}
+
+.page-subtitle {
+    color: white;
+    font-size: 1.1rem;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+    margin-bottom: 40px;
+}
+
+/* Cards Grid */
+.cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    max-width: 1200px;
+    width: 100%;
+    padding: 0 20px;
+}
+
+/* Scratch Card Wrapper */
+.scratch-card-wrapper {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: 0 15px 40px rgba(196, 69, 105, 0.25);
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+.scratch-card-wrapper:hover {
+    transform: translateY(-5px);
+}
+
+.scratch-card-wrapper.special {
+    background: linear-gradient(135deg, rgba(255, 215, 0, 0.2), rgba(255, 255, 255, 0.95));
+    border: 3px solid #ffd700;
+    box-shadow: 0 15px 40px rgba(255, 215, 0, 0.3);
+}
+
+.day-label {
+    font-weight: 600;
+    font-size: 1.2rem;
+    color: #c44569;
+    margin-bottom: 5px;
+}
+
+.date-label {
+    font-size: 0.9rem;
+    color: #ff6b9d;
+    margin-bottom: 10px;
+}
+
+/* Timer Display */
+.timer-display {
+    background: linear-gradient(135deg, #fff0f5, #ffe4ec);
+    padding: 10px 20px;
+    border-radius: 25px;
+    margin-bottom: 15px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: inset 0 2px 5px rgba(196, 69, 105, 0.1);
+}
+
+.timer-icon {
+    font-size: 1.2rem;
+}
+
+.timer-text {
+    font-weight: 600;
+    color: #c44569;
+    font-size: 0.95rem;
+}
+
+.timer-display.unlocked {
+    background: linear-gradient(135deg, #d4edda, #c3e6cb);
+}
+
+.timer-display.unlocked .timer-text {
+    color: #28a745;
+}
+
+/* Scratch Card */
+.scratch-card {
+    position: relative;
+    width: 100%;
+    height: 180px;
+    border-radius: 15px;
+    overflow: hidden;
+    cursor: pointer;
+    background: linear-gradient(135deg, #ffc1e3, #ff6b9d);
+}
+
+.scratch-card.locked {
+    cursor: not-allowed;
+}
+
+.scratch-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    border-radius: 15px;
+}
+
+.card-content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    background: linear-gradient(135deg, #fff5f8, #ffffff);
+    z-index: 1;
+}
+
+.card-emoji {
+    font-size: 3rem;
+    margin-bottom: 10px;
+    animation: bounce 2s ease-in-out infinite;
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+.card-message {
+    font-size: 1rem;
+    color: #c44569;
+    text-align: center;
+    font-weight: 500;
+    line-height: 1.5;
+}
+
+.special-content {
+    background: linear-gradient(135deg, #fff5e6, #fff0f5);
+}
+
+.special-content .card-message {
+    font-size: 1.1rem;
+    color: #c44569;
+}
+
+/* Locked Overlay */
+.scratch-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #e0e0e0, #bdbdbd);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 3;
+    border-radius: 15px;
+}
+
+.scratch-overlay span {
+    font-size: 3rem;
+    margin-bottom: 10px;
+}
+
+.scratch-overlay p {
+    color: #666;
+    font-weight: 600;
+}
+
+.scratch-overlay.hidden {
+    display: none;
+}
+
+/* Back Button */
+.back-btn {
+    margin-top: 40px;
+    display: inline-block;
+    padding: 15px 35px;
+    background: white;
+    color: #c44569;
+    text-decoration: none;
+    border-radius: 50px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+.back-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.15);
+    background: #fff0f5;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .title {
+        font-size: 2.2rem;
+    }
+    
+    .main-card {
+        padding: 40px 30px;
+    }
+    
+    .buttons {
+        flex-direction: column;
+    }
+    
+    .btn {
+        width: 100%;
+    }
+    
+    .page-title {
+        font-size: 2.2rem;
+    }
+    
+    .cards-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Scratched State */
+.scratch-card.scratched .scratch-canvas {
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+/* Confetti Animation for revealed cards */
+@keyframes confetti {
+    0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+    100% { transform: translateY(-100px) rotate(720deg); opacity: 0; }
+}
+
+.confetti {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background: #ff6b9d;
+    animation: confetti 1s ease-out forwards;
+}

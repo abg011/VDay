@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>7 Days of Love 💕</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body class="cards-page">
+    <div class="floating-hearts">
+        <div class="heart">💕</div>
+        <div class="heart">💖</div>
+        <div class="heart">💗</div>
+        <div class="heart">💓</div>
+        <div class="heart">💝</div>
+        <div class="heart">💕</div>
+        <div class="heart">💖</div>
+        <div class="heart">💗</div>
+    </div>
+
+    <div class="container cards-container">
+        <h1 class="page-title">7 Days of Love 💕</h1>
+        <p class="page-subtitle">Scratch a card each day to reveal your special message!</p>
+        
+        <div class="cards-grid">
+            <!-- Day 1 -->
+            <div class="scratch-card-wrapper" data-day="1">
+                <div class="day-label">Day 1</div>
+                <div class="date-label">Feb 8</div>
+                <div class="timer-display" id="timer-1">
+                    <span class="timer-icon">⏰</span>
+                    <span class="timer-text">Loading...</span>
+                </div>
+                <div class="scratch-card locked" id="card-1">
+                    <canvas class="scratch-canvas" id="canvas-1"></canvas>
+                    <div class="card-content" id="content-1">
+                        <div class="card-emoji">🌹</div>
+                        <p class="card-message">You make my heart skip a beat every single day!</p>
+                    </div>
+                    <div class="scratch-overlay" id="overlay-1">
+                        <span>🔒</span>
+                        <p>Unlocks Soon!</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Day 2 -->
+            <div class="scratch-card-wrapper" data-day="2">
+                <div class="day-label">Day 2</div>
+                <div class="date-label">Feb 9</div>
+                <div class="timer-display" id="timer-2">
+                    <span class="timer-icon">⏰</span>
+                    <span class="timer-text">Loading...</span>
+                </div>
+                <div class="scratch-card locked" id="card-2">
+                    <canvas class="scratch-canvas" id="canvas-2"></canvas>
+                    <div class="card-content" id="content-2">
+                        <div class="card-emoji">💝</div>
+                        <p class="card-message">Your smile is my favorite thing in the whole world!</p>
+                    </div>
+                    <div class="scratch-overlay" id="overlay-2">
+                        <span>🔒</span>
+                        <p>Unlocks Soon!</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Day 3 -->
+            <div class="scratch-card-wrapper" data-day="3">
+                <div class="day-label">Day 3</div>
+                <div class="date-label">Feb 10</div>
+                <div class="timer-display" id="timer-3">
+                    <span class="timer-icon">⏰</span>
+                    <span class="timer-text">Loading...</span>
+                </div>
+                <div class="scratch-card locked" id="card-3">
+                    <canvas class="scratch-canvas" id="canvas-3"></canvas>
+                    <div class="card-content" id="content-3">
+                        <div class="card-emoji">🦋</div>
+                        <p class="card-message">You give me butterflies every time I see you!</p>
+                    </div>
+                    <div class="scratch-overlay" id="overlay-3">
+                        <span>🔒</span>
+                        <p>Unlocks Soon!</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Day 4 -->
+            <div class="scratch-card-wrapper" data-day="4">
+                <div class="day-label">Day 4</div>
+                <div class="date-label">Feb 11</div>
+                <div class="timer-display" id="timer-4">
+                    <span class="timer-icon">⏰</span>
+                    <span class="timer-text">Loading...</span>
+                </div>
+                <div class="scratch-card locked" id="card-4">
+                    <canvas class="scratch-canvas" id="canvas-4"></canvas>
+                    <div class="card-content" id="content-4">
+                        <div class="card-emoji">⭐</div>
+                        <p class="card-message">You're my favorite person to do nothing with!</p>
+                    </div>
+                    <div class="scratch-overlay" id="overlay-4">
+                        <span>🔒</span>
+                        <p>Unlocks Soon!</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Day 5 -->
+            <div class="scratch-card-wrapper" data-day="5">
+                <div class="day-label">Day 5</div>
+                <div class="date-label">Feb 12</div>
+                <div class="timer-display" id="timer-5">
+                    <span class="timer-icon">⏰</span>
+                    <span class="timer-text">Loading...</span>
+                </div>
+                <div class="scratch-card locked" id="card-5">
+                    <canvas class="scratch-canvas" id="canvas-5"></canvas>
+                    <div class="card-content" id="content-5">
+                        <div class="card-emoji">🎁</div>
+                        <p class="card-message">Every moment with you is a gift I treasure!</p>
+                    </div>
+                    <div class="scratch-overlay" id="overlay-5">
+                        <span>🔒</span>
+                        <p>Unlocks Soon!</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Day 6 -->
+            <div class="scratch-card-wrapper" data-day="6">
+                <div class="day-label">Day 6</div>
+                <div class="date-label">Feb 13</div>
+                <div class="timer-display" id="timer-6">
+                    <span class="timer-icon">⏰</span>
+                    <span class="timer-text">Loading...</span>
+                </div>
+                <div class="scratch-card locked" id="card-6">
+                    <canvas class="scratch-canvas" id="canvas-6"></canvas>
+                    <div class="card-content" id="content-6">
+                        <div class="card-emoji">💫</div>
+                        <p class="card-message">I fall in love with you more every single day!</p>
+                    </div>
+                    <div class="scratch-overlay" id="overlay-6">
+                        <span>🔒</span>
+                        <p>Unlocks Soon!</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Day 7 - Valentine's Day -->
+            <div class="scratch-card-wrapper special" data-day="7">
+                <div class="day-label">Day 7</div>
+                <div class="date-label">Feb 14 💕</div>
+                <div class="timer-display" id="timer-7">
+                    <span class="timer-icon">⏰</span>
+                    <span class="timer-text">Loading...</span>
+                </div>
+                <div class="scratch-card locked" id="card-7">
+                    <canvas class="scratch-canvas" id="canvas-7"></canvas>
+                    <div class="card-content special-content" id="content-7">
+                        <div class="card-emoji">💕</div>
+                        <p class="card-message">Happy Valentine's Day! I love you more than words can say! You're my everything! 💖</p>
+                    </div>
+                    <div class="scratch-overlay" id="overlay-7">
+                        <span>🔒</span>
+                        <p>Unlocks Soon!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <a href="index.html" class="back-btn">← Back to Home</a>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

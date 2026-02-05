@@ -121,6 +121,22 @@ body {
     100% { transform: translateX(100%) rotate(45deg); }
 }
 
+.greeting {
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.8rem;
+    color: #ff6b9d;
+    margin-bottom: 10px;
+    position: relative;
+    z-index: 1;
+    text-shadow: 1px 1px 3px rgba(255, 107, 157, 0.3);
+    animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
 .title {
     font-family: 'Dancing Script', cursive;
     font-size: 3rem;

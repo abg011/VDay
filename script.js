@@ -1,12 +1,13 @@
-// Configuration - Unlock dates for each card (Feb 8-14, 2026)
+// Configuration - Unlock dates for each card (Valentine Week: Feb 7-14, 2026)
 const unlockDates = {
-    1: new Date('2026-02-08T00:00:00'),
-    2: new Date('2026-02-09T00:00:00'),
-    3: new Date('2026-02-10T00:00:00'),
-    4: new Date('2026-02-11T00:00:00'),
-    5: new Date('2026-02-12T00:00:00'),
-    6: new Date('2026-02-13T00:00:00'),
-    7: new Date('2026-02-14T00:00:00')
+    1: new Date('2026-02-07T00:00:00'), // Rose Day
+    2: new Date('2026-02-08T00:00:00'), // Propose Day
+    3: new Date('2026-02-09T00:00:00'), // Chocolate Day
+    4: new Date('2026-02-10T00:00:00'), // Teddy Day
+    5: new Date('2026-02-11T00:00:00'), // Promise Day
+    6: new Date('2026-02-12T00:00:00'), // Hug Day
+    7: new Date('2026-02-13T00:00:00'), // Kiss Day
+    8: new Date('2026-02-14T00:00:00')  // Valentine's Day
 };
 
 // Store scratched cards in localStorage
@@ -26,7 +27,7 @@ const clickTimers = {};
 
 // Initialize all cards
 function initializeCards() {
-    for (let day = 1; day <= 7; day++) {
+    for (let day = 1; day <= 8; day++) {
         const card = document.getElementById(`card-${day}`);
         const canvas = document.getElementById(`canvas-${day}`);
         const overlay = document.getElementById(`overlay-${day}`);
@@ -107,7 +108,7 @@ function startTimers() {
 
 // Update all timer displays
 function updateAllTimers() {
-    for (let day = 1; day <= 7; day++) {
+    for (let day = 1; day <= 8; day++) {
         updateTimer(day);
     }
 }

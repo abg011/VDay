@@ -20,12 +20,39 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
+// Secret unlock tracking
+const clickCounts = {};
+const clickTimers = {};
+
 // Initialize all cards
 function initializeCards() {
     for (let day = 1; day <= 7; day++) {
         const card = document.getElementById(`card-${day}`);
         const canvas = document.getElementById(`canvas-${day}`);
         const overlay = document.getElementById(`overlay-${day}`);
+        
+        // Initialize click counter for secret unlock
+        clickCounts[day] = 0;
+        
+        // Add secret triple-click unlock on day label
+        const wrapper = document.querySelector(`.scratch-card-wrapper[data-day="${day}"]`);
+        const dayLabel = wrapper.querySelector('.day-label');
+        
+        dayLabel.addEventListener('click', () => {
+            clickCounts[day]++;
+            
+            // Reset click count after 500ms of no clicks
+            clearTimeout(clickTimers[day]);
+            clickTimers[day] = setTimeout(() => {
+                clickCounts[day] = 0;
+            }, 500);
+            
+            // Triple click detected - secret unlock!
+            if (clickCounts[day] >= 3) {
+                secretUnlock(day);
+                clickCounts[day] = 0;
+            }
+        });
         
         if (scratchedCards[day]) {
             // Card was already scratched
@@ -40,6 +67,30 @@ function initializeCards() {
             initScratchCanvas(day);
         }
     }
+}
+
+// Secret unlock function - triple click on day label
+function secretUnlock(day) {
+    const card = document.getElementById(`card-${day}`);
+    const overlay = document.getElementById(`overlay-${day}`);
+    const timerDisplay = document.getElementById(`timer-${day}`);
+    const timerText = timerDisplay.querySelector('.timer-text');
+    const timerIcon = timerDisplay.querySelector('.timer-icon');
+    
+    if (scratchedCards[day] || !card.classList.contains('locked')) {
+        return; // Already unlocked or scratched
+    }
+    
+    // Unlock the card
+    card.classList.remove('locked');
+    overlay.classList.add('hidden');
+    timerDisplay.classList.add('unlocked');
+    timerIcon.textContent = '🔓';
+    timerText.textContent = 'Secret unlock!';
+    
+    initScratchCanvas(day);
+    
+    console.log(`🔓 Day ${day} secretly unlocked!`);
 }
 
 // Check if a card is unlocked

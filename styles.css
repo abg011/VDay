@@ -71,6 +71,7 @@ body {
 .container {
     min-height: 100vh;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     padding: 20px;
@@ -123,12 +124,12 @@ body {
 
 .greeting {
     font-family: 'Dancing Script', cursive;
-    font-size: 1.8rem;
-    color: #ff6b9d;
-    margin-bottom: 10px;
+    font-size: 2.2rem;
+    color: white;
+    margin-bottom: 25px;
     position: relative;
     z-index: 1;
-    text-shadow: 1px 1px 3px rgba(255, 107, 157, 0.3);
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
     animation: pulse 2s ease-in-out infinite;
 }
 
@@ -285,6 +286,13 @@ body {
     font-size: 1.2rem;
     color: #c44569;
     margin-bottom: 5px;
+    cursor: pointer;
+    user-select: none;
+    transition: transform 0.1s ease;
+}
+
+.day-label:active {
+    transform: scale(0.95);
 }
 
 .date-label {

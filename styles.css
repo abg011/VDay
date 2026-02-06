@@ -190,6 +190,40 @@ body {
     box-shadow: 0 8px 25px rgba(196, 69, 105, 0.4);
 }
 
+.btn-no {
+    background: linear-gradient(135deg, #95a5a6 0%, #bdc3c7 100%);
+    color: white;
+    box-shadow: 0 8px 25px rgba(149, 165, 166, 0.4);
+    font-size: 1rem;
+    padding: 12px 30px;
+}
+
+.btn-no:hover {
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 12px 30px rgba(149, 165, 166, 0.4);
+}
+
+.btn-large {
+    padding: 22px 60px;
+    font-size: 1.4rem;
+}
+
+.sad-title {
+    color: #c44569;
+}
+
+.sad-card {
+    animation: shake 0.5s ease-in-out;
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    20% { transform: translateX(-10px); }
+    40% { transform: translateX(10px); }
+    60% { transform: translateX(-10px); }
+    80% { transform: translateX(10px); }
+}
+
 .btn:hover {
     transform: translateY(-5px) scale(1.05);
     box-shadow: 0 15px 40px rgba(255, 107, 157, 0.5);

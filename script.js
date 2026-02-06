@@ -1,3 +1,73 @@
+// Audio Context for sound effects
+let audioContext = null;
+
+function getAudioContext() {
+    if (!audioContext) {
+        audioContext = new (window.AudioContext || window.webkitAudioContext)();
+    }
+    return audioContext;
+}
+
+// Play sound effects
+function playSound(type) {
+    const ctx = getAudioContext();
+    
+    if (type === 'yes') {
+        // Happy chime sound
+        playTone(ctx, 523.25, 0.15); // C5
+        setTimeout(() => playTone(ctx, 659.25, 0.15), 100); // E5
+        setTimeout(() => playTone(ctx, 783.99, 0.2), 200); // G5
+    } else if (type === 'omg') {
+        // Excited celebration sound
+        playTone(ctx, 523.25, 0.1); // C5
+        setTimeout(() => playTone(ctx, 659.25, 0.1), 80); // E5
+        setTimeout(() => playTone(ctx, 783.99, 0.1), 160); // G5
+        setTimeout(() => playTone(ctx, 1046.50, 0.3), 240); // C6
+        setTimeout(() => {
+            playTone(ctx, 783.99, 0.15);
+            playTone(ctx, 1046.50, 0.15);
+        }, 400);
+    } else if (type === 'no') {
+        // Sad trombone sound
+        playTone(ctx, 311.13, 0.3, 'triangle'); // Eb4
+        setTimeout(() => playTone(ctx, 293.66, 0.3, 'triangle'), 250); // D4
+        setTimeout(() => playTone(ctx, 277.18, 0.3, 'triangle'), 500); // Db4
+        setTimeout(() => playTone(ctx, 261.63, 0.5, 'triangle'), 750); // C4
+    } else if (type === 'scratch') {
+        // Scratch reveal sound
+        playTone(ctx, 400, 0.05);
+        setTimeout(() => playTone(ctx, 500, 0.05), 30);
+        setTimeout(() => playTone(ctx, 600, 0.05), 60);
+        setTimeout(() => playTone(ctx, 800, 0.1), 90);
+        setTimeout(() => playTone(ctx, 1000, 0.15), 120);
+    }
+}
+
+// Play a single tone
+function playTone(ctx, frequency, duration, type = 'sine') {
+    const oscillator = ctx.createOscillator();
+    const gainNode = ctx.createGain();
+    
+    oscillator.connect(gainNode);
+    gainNode.connect(ctx.destination);
+    
+    oscillator.frequency.value = frequency;
+    oscillator.type = type;
+    
+    gainNode.gain.setValueAtTime(0.3, ctx.currentTime);
+    gainNode.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + duration);
+    
+    oscillator.start(ctx.currentTime);
+    oscillator.stop(ctx.currentTime + duration);
+}
+
+// Navigate with delay for sound to play
+function navigateTo(url) {
+    setTimeout(() => {
+        window.location.href = url;
+    }, 300);
+}
+
 // Configuration - Unlock dates for each card (Valentine Week: Feb 7-14, 2026)
 const unlockDates = {
     1: new Date('2026-02-07T00:00:00'), // Rose Day
@@ -286,6 +356,9 @@ function initScratchCanvas(day) {
 function revealCard(day) {
     const card = document.getElementById(`card-${day}`);
     const canvas = document.getElementById(`canvas-${day}`);
+    
+    // Play celebration sound
+    playSound('scratch');
     
     // Mark as scratched
     scratchedCards[day] = true;

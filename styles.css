@@ -432,6 +432,124 @@ body {
     color: #c44569;
 }
 
+/* Make Day 8 card bigger */
+.scratch-card-wrapper.special .scratch-card {
+    height: 220px;
+}
+
+/* Card content formatting */
+.card-title {
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.5rem;
+    color: #c44569;
+    margin-bottom: 8px;
+}
+
+.card-content .card-message {
+    font-size: 0.9rem;
+    line-height: 1.4;
+    opacity: 0.9;
+}
+
+/* Popup Modal Styles */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.modal-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.modal-content {
+    background: linear-gradient(135deg, #fff5f8, #ffffff);
+    border-radius: 25px;
+    padding: 40px;
+    max-width: 400px;
+    width: 90%;
+    text-align: center;
+    transform: scale(0.8);
+    transition: transform 0.3s ease;
+    box-shadow: 0 25px 60px rgba(196, 69, 105, 0.4);
+    position: relative;
+}
+
+.modal-overlay.active .modal-content {
+    transform: scale(1);
+}
+
+.modal-content.special-modal {
+    background: linear-gradient(135deg, #fff5e6, #fff0f5, #ffe4ec);
+    border: 3px solid #ffd700;
+    max-width: 450px;
+    padding: 50px 40px;
+}
+
+.modal-emoji {
+    font-size: 4rem;
+    margin-bottom: 15px;
+    animation: bounce 2s ease-in-out infinite;
+}
+
+.modal-title {
+    font-family: 'Dancing Script', cursive;
+    font-size: 2rem;
+    color: #c44569;
+    margin-bottom: 20px;
+}
+
+.modal-message {
+    font-size: 1.1rem;
+    color: #666;
+    line-height: 1.6;
+    margin-bottom: 25px;
+}
+
+.modal-close {
+    background: linear-gradient(135deg, #ff6b9d 0%, #c44569 100%);
+    color: white;
+    border: none;
+    padding: 12px 35px;
+    border-radius: 50px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    font-family: 'Poppins', sans-serif;
+}
+
+.modal-close:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(196, 69, 105, 0.4);
+}
+
+.scratch-card.scratched {
+    cursor: pointer;
+}
+
+.scratch-card.scratched:hover {
+    transform: scale(1.02);
+    transition: transform 0.2s ease;
+}
+
+.tap-hint {
+    font-size: 0.75rem;
+    color: #999;
+    margin-top: 8px;
+}
+
 /* Locked Overlay */
 .scratch-overlay {
     position: absolute;

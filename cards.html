@@ -19,6 +19,16 @@
         <div class="heart">💗</div>
     </div>
 
+    <!-- Popup Modal -->
+    <div class="modal-overlay" id="modal-overlay">
+        <div class="modal-content" id="modal-content">
+            <div class="modal-emoji" id="modal-emoji">🌹</div>
+            <h2 class="modal-title" id="modal-title">Happy Rose Day!</h2>
+            <p class="modal-message" id="modal-message">Message here</p>
+            <button class="modal-close" onclick="closeModal()">Close 💕</button>
+        </div>
+    </div>
+
     <div class="container cards-container">
         <h1 class="page-title">Valentine Week 💕</h1>
         <p class="page-subtitle">Scratch a card each day to reveal your special message!</p>
@@ -32,11 +42,17 @@
                     <span class="timer-icon">⏰</span>
                     <span class="timer-text">Loading...</span>
                 </div>
-                <div class="scratch-card locked" id="card-1">
+                <div class="scratch-card locked" id="card-1" 
+                     data-emoji="🌹" 
+                     data-title="Happy Rose Day!" 
+                     data-message="Early to bed, early to rise... Tomorrow we chase flowers before the sun lights the skies! 🌅
+
+Get ready for a colorful, chaotic & magical adventure!">
                     <canvas class="scratch-canvas" id="canvas-1"></canvas>
                     <div class="card-content" id="content-1">
                         <div class="card-emoji">🌹</div>
-                        <p class="card-message">Happy Rose Day! 🌅 Early to bed, early to rise... Tomorrow we chase flowers before the sun lights the skies!</p>
+                        <p class="card-title">Happy Rose Day!</p>
+                        <p class="card-message">Tap to read your message 💌</p>
                     </div>
                     <div class="scratch-overlay" id="overlay-1">
                         <span>🔒</span>
@@ -53,11 +69,17 @@
                     <span class="timer-icon">⏰</span>
                     <span class="timer-text">Loading...</span>
                 </div>
-                <div class="scratch-card locked" id="card-2">
+                <div class="scratch-card locked" id="card-2"
+                     data-emoji="🥐"
+                     data-title="Happy Propose Day!"
+                     data-message="Lazy Sunday mornings are better with you... ☀️
+
+Get ready for a delicious surprise! Dress cute, we're going somewhere nice!">
                     <canvas class="scratch-canvas" id="canvas-2"></canvas>
                     <div class="card-content" id="content-2">
                         <div class="card-emoji">🥐</div>
-                        <p class="card-message">Happy Propose Day! ☀️ Lazy Sunday mornings are better with you... Get ready for a delicious surprise! Dress cute, we're going somewhere nice!</p>
+                        <p class="card-title">Happy Propose Day!</p>
+                        <p class="card-message">Tap to read your message 💌</p>
                     </div>
                     <div class="scratch-overlay" id="overlay-2">
                         <span>🔒</span>
@@ -74,11 +96,17 @@
                     <span class="timer-icon">⏰</span>
                     <span class="timer-text">Loading...</span>
                 </div>
-                <div class="scratch-card locked" id="card-3">
+                <div class="scratch-card locked" id="card-3"
+                     data-emoji="🍫"
+                     data-title="Happy Chocolate Day!"
+                     data-message="I know Monday is WFO... 🏢
+
+But something sweet is waiting for you at home tonight! You deserve it after a long day!">
                     <canvas class="scratch-canvas" id="canvas-3"></canvas>
                     <div class="card-content" id="content-3">
                         <div class="card-emoji">🍫</div>
-                        <p class="card-message">Happy Chocolate Day! 🏢 I know Monday is WFO... but something sweet is waiting for you at home tonight! You deserve it after a long day!</p>
+                        <p class="card-title">Happy Chocolate Day!</p>
+                        <p class="card-message">Tap to read your message 💌</p>
                     </div>
                     <div class="scratch-overlay" id="overlay-3">
                         <span>🔒</span>
@@ -95,11 +123,17 @@
                     <span class="timer-icon">⏰</span>
                     <span class="timer-text">Loading...</span>
                 </div>
-                <div class="scratch-card locked" id="card-4">
+                <div class="scratch-card locked" id="card-4"
+                     data-emoji="☕"
+                     data-title="Happy Teddy Day!"
+                     data-message="WFH doesn't mean boring... 💻
+
+Pack your laptop! We're working from somewhere cozy today. Good coffee + You = Perfect day!">
                     <canvas class="scratch-canvas" id="canvas-4"></canvas>
                     <div class="card-content" id="content-4">
                         <div class="card-emoji">☕</div>
-                        <p class="card-message">Happy Teddy Day! 💻 WFH doesn't mean boring... Pack your laptop! We're working from somewhere cozy today. Good coffee + You = Perfect day!</p>
+                        <p class="card-title">Happy Teddy Day!</p>
+                        <p class="card-message">Tap to read your message 💌</p>
                     </div>
                     <div class="scratch-overlay" id="overlay-4">
                         <span>🔒</span>
@@ -116,11 +150,17 @@
                     <span class="timer-icon">⏰</span>
                     <span class="timer-text">Loading...</span>
                 </div>
-                <div class="scratch-card locked" id="card-5">
+                <div class="scratch-card locked" id="card-5"
+                     data-emoji="🍳"
+                     data-title="Happy Promise Day!"
+                     data-message="Another WFO Wednesday... 🏢
+
+But I promise to make the evening special! Coming home to cook your favorite meal together!">
                     <canvas class="scratch-canvas" id="canvas-5"></canvas>
                     <div class="card-content" id="content-5">
                         <div class="card-emoji">🍳</div>
-                        <p class="card-message">Happy Promise Day! 🏢 Another WFO Wednesday... but I promise to make the evening special! Coming home to cook your favorite meal together!</p>
+                        <p class="card-title">Happy Promise Day!</p>
+                        <p class="card-message">Tap to read your message 💌</p>
                     </div>
                     <div class="scratch-overlay" id="overlay-5">
                         <span>🔒</span>
@@ -137,11 +177,17 @@
                     <span class="timer-icon">⏰</span>
                     <span class="timer-text">Loading...</span>
                 </div>
-                <div class="scratch-card locked" id="card-6">
+                <div class="scratch-card locked" id="card-6"
+                     data-emoji="🎬"
+                     data-title="Happy Hug Day!"
+                     data-message="Tonight we're staying in... 🛋️
+
+Blankets, snacks, your favorite movie & endless cuddles! No phones allowed, just us!">
                     <canvas class="scratch-canvas" id="canvas-6"></canvas>
                     <div class="card-content" id="content-6">
                         <div class="card-emoji">🎬</div>
-                        <p class="card-message">Happy Hug Day! 🛋️ Tonight we're staying in... Blankets, snacks, your favorite movie & endless cuddles! No phones allowed, just us!</p>
+                        <p class="card-title">Happy Hug Day!</p>
+                        <p class="card-message">Tap to read your message 💌</p>
                     </div>
                     <div class="scratch-overlay" id="overlay-6">
                         <span>🔒</span>
@@ -158,11 +204,17 @@
                     <span class="timer-icon">⏰</span>
                     <span class="timer-text">Loading...</span>
                 </div>
-                <div class="scratch-card locked" id="card-7">
+                <div class="scratch-card locked" id="card-7"
+                     data-emoji="🍷"
+                     data-title="Happy Kiss Day!"
+                     data-message="Clear your evening & dress up fancy... 👗
+
+I'm taking you somewhere special tonight! Candlelight, good food & just the two of us!">
                     <canvas class="scratch-canvas" id="canvas-7"></canvas>
                     <div class="card-content" id="content-7">
                         <div class="card-emoji">🍷</div>
-                        <p class="card-message">Happy Kiss Day! 👗 Clear your evening & dress up fancy... I'm taking you somewhere special tonight! Candlelight, good food & just the two of us!</p>
+                        <p class="card-title">Happy Kiss Day!</p>
+                        <p class="card-message">Tap to read your message 💌</p>
                     </div>
                     <div class="scratch-overlay" id="overlay-7">
                         <span>🔒</span>
@@ -179,11 +231,20 @@
                     <span class="timer-icon">⏰</span>
                     <span class="timer-text">Loading...</span>
                 </div>
-                <div class="scratch-card locked" id="card-8">
+                <div class="scratch-card locked" id="card-8"
+                     data-emoji="🎵"
+                     data-title="Happy Valentine's Day!"
+                     data-message="The grand finale is here! 🎉
+
+Dress up baby & make sure you have comfy footwear... It's going to be a night of music, dancing & unforgettable memories!
+
+I love you endlessly! 💖"
+                     data-special="true">
                     <canvas class="scratch-canvas" id="canvas-8"></canvas>
                     <div class="card-content special-content" id="content-8">
                         <div class="card-emoji">🎵</div>
-                        <p class="card-message">Happy Valentine's Day! 🎉 The grand finale is here! Dress up baby & make sure you have comfy footwear...! 💖</p>
+                        <p class="card-title">Happy Valentine's Day!</p>
+                        <p class="card-message">Tap to read your message 💌</p>
                     </div>
                     <div class="scratch-overlay" id="overlay-8">
                         <span>🔒</span>

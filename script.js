@@ -315,6 +315,8 @@ function initializeCards() {
             card.classList.remove('locked');
             overlay.classList.add('hidden');
             canvas.style.display = 'none';
+            // Add click handler to open modal
+            card.addEventListener('click', () => openModal(day));
         } else if (isUnlocked(day)) {
             // Card is unlocked but not scratched
             card.classList.remove('locked');
@@ -560,10 +562,58 @@ function revealCard(day) {
     // Create confetti effect
     createConfetti(card);
     
+    // Add click handler for popup
+    card.addEventListener('click', () => openModal(day));
+    
     setTimeout(() => {
         canvas.style.display = 'none';
+        // Auto-open modal after reveal
+        openModal(day);
     }, 500);
 }
+
+// Open modal popup with card message
+function openModal(day) {
+    const card = document.getElementById(`card-${day}`);
+    if (!card.classList.contains('scratched')) return;
+    
+    const emoji = card.dataset.emoji;
+    const title = card.dataset.title;
+    const message = card.dataset.message;
+    const isSpecial = card.dataset.special === 'true';
+    
+    const overlay = document.getElementById('modal-overlay');
+    const modalContent = document.getElementById('modal-content');
+    const modalEmoji = document.getElementById('modal-emoji');
+    const modalTitle = document.getElementById('modal-title');
+    const modalMessage = document.getElementById('modal-message');
+    
+    modalEmoji.textContent = emoji;
+    modalTitle.textContent = title;
+    modalMessage.innerHTML = message.replace(/\n/g, '<br>');
+    
+    if (isSpecial) {
+        modalContent.classList.add('special-modal');
+    } else {
+        modalContent.classList.remove('special-modal');
+    }
+    
+    overlay.classList.add('active');
+}
+
+// Close modal popup
+function closeModal() {
+    const overlay = document.getElementById('modal-overlay');
+    overlay.classList.remove('active');
+}
+
+// Close modal when clicking outside
+document.addEventListener('click', function(e) {
+    const overlay = document.getElementById('modal-overlay');
+    if (e.target === overlay) {
+        closeModal();
+    }
+});
 
 // Create confetti celebration
 function createConfetti(container) {

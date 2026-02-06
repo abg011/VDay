@@ -18,28 +18,132 @@ function playSound(type) {
         setTimeout(() => playTone(ctx, 659.25, 0.15), 100); // E5
         setTimeout(() => playTone(ctx, 783.99, 0.2), 200); // G5
     } else if (type === 'omg') {
-        // Excited celebration sound
-        playTone(ctx, 523.25, 0.1); // C5
-        setTimeout(() => playTone(ctx, 659.25, 0.1), 80); // E5
-        setTimeout(() => playTone(ctx, 783.99, 0.1), 160); // G5
-        setTimeout(() => playTone(ctx, 1046.50, 0.3), 240); // C6
+        // Celebration fanfare with applause-like noise
+        // Fanfare trumpets
+        playTone(ctx, 523.25, 0.15); // C5
+        playTone(ctx, 659.25, 0.15); // E5
+        playTone(ctx, 783.99, 0.15); // G5
+        
         setTimeout(() => {
-            playTone(ctx, 783.99, 0.15);
-            playTone(ctx, 1046.50, 0.15);
-        }, 400);
+            playTone(ctx, 698.46, 0.15); // F5
+            playTone(ctx, 880.00, 0.15); // A5
+            playTone(ctx, 1046.50, 0.15); // C6
+        }, 150);
+        
+        setTimeout(() => {
+            playTone(ctx, 783.99, 0.2); // G5
+            playTone(ctx, 987.77, 0.2); // B5
+            playTone(ctx, 1174.66, 0.2); // D6
+        }, 300);
+        
+        // Final triumphant chord
+        setTimeout(() => {
+            playTone(ctx, 1046.50, 0.4); // C6
+            playTone(ctx, 1318.51, 0.4); // E6
+            playTone(ctx, 1567.98, 0.4); // G6
+        }, 450);
+        
+        // Applause-like noise bursts
+        for (let i = 0; i < 15; i++) {
+            setTimeout(() => playNoise(ctx, 0.08), 100 + i * 40);
+        }
+        for (let i = 0; i < 20; i++) {
+            setTimeout(() => playNoise(ctx, 0.06), 500 + i * 30);
+        }
     } else if (type === 'no') {
         // Sad trombone sound
         playTone(ctx, 311.13, 0.3, 'triangle'); // Eb4
         setTimeout(() => playTone(ctx, 293.66, 0.3, 'triangle'), 250); // D4
         setTimeout(() => playTone(ctx, 277.18, 0.3, 'triangle'), 500); // Db4
         setTimeout(() => playTone(ctx, 261.63, 0.5, 'triangle'), 750); // C4
-    } else if (type === 'scratch') {
-        // Scratch reveal sound
-        playTone(ctx, 400, 0.05);
-        setTimeout(() => playTone(ctx, 500, 0.05), 30);
-        setTimeout(() => playTone(ctx, 600, 0.05), 60);
-        setTimeout(() => playTone(ctx, 800, 0.1), 90);
-        setTimeout(() => playTone(ctx, 1000, 0.15), 120);
+    } else if (type === 'reveal') {
+        // Card reveal celebration - cheerful and sparkly
+        // Magical chime
+        playTone(ctx, 1318.51, 0.2); // E6
+        setTimeout(() => playTone(ctx, 1567.98, 0.2), 100); // G6
+        setTimeout(() => playTone(ctx, 1975.53, 0.3), 200); // B6
+        setTimeout(() => playTone(ctx, 2093.00, 0.4), 300); // C7
+        
+        // Sparkle sounds
+        for (let i = 0; i < 8; i++) {
+            setTimeout(() => {
+                playTone(ctx, 2000 + Math.random() * 1000, 0.1);
+            }, 150 + i * 50);
+        }
+        
+        // Happy chord
+        setTimeout(() => {
+            playTone(ctx, 1046.50, 0.3); // C6
+            playTone(ctx, 1318.51, 0.3); // E6
+            playTone(ctx, 1567.98, 0.3); // G6
+        }, 450);
+        
+        // Light applause
+        for (let i = 0; i < 10; i++) {
+            setTimeout(() => playNoise(ctx, 0.06), 300 + i * 40);
+        }
+        
+    } else if (type === 'ultimate') {
+        // ULTIMATE Valentine's Day celebration! 🎆🎇🎉
+        
+        // Epic fanfare opening
+        playTone(ctx, 523.25, 0.2); // C5
+        playTone(ctx, 659.25, 0.2); // E5
+        playTone(ctx, 783.99, 0.2); // G5
+        
+        setTimeout(() => {
+            playTone(ctx, 587.33, 0.2); // D5
+            playTone(ctx, 739.99, 0.2); // F#5
+            playTone(ctx, 880.00, 0.2); // A5
+        }, 200);
+        
+        setTimeout(() => {
+            playTone(ctx, 659.25, 0.2); // E5
+            playTone(ctx, 830.61, 0.2); // G#5
+            playTone(ctx, 987.77, 0.2); // B5
+        }, 400);
+        
+        // Triumphant climax chord
+        setTimeout(() => {
+            playTone(ctx, 1046.50, 0.6); // C6
+            playTone(ctx, 1318.51, 0.6); // E6
+            playTone(ctx, 1567.98, 0.6); // G6
+            playTone(ctx, 2093.00, 0.6); // C7
+        }, 600);
+        
+        // Firework explosions (multiple bursts)
+        for (let burst = 0; burst < 5; burst++) {
+            setTimeout(() => {
+                // Each firework burst
+                playFirework(ctx);
+            }, 800 + burst * 300);
+        }
+        
+        // Continuous sparkles
+        for (let i = 0; i < 25; i++) {
+            setTimeout(() => {
+                playTone(ctx, 1500 + Math.random() * 2000, 0.08);
+            }, 600 + i * 80);
+        }
+        
+        // Big applause
+        for (let i = 0; i < 40; i++) {
+            setTimeout(() => playNoise(ctx, 0.1), 500 + i * 50);
+        }
+        
+        // Final glorious chord
+        setTimeout(() => {
+            playTone(ctx, 1046.50, 0.8); // C6
+            playTone(ctx, 1318.51, 0.8); // E6
+            playTone(ctx, 1567.98, 0.8); // G6
+            playTone(ctx, 2093.00, 0.8); // C7
+            playTone(ctx, 2637.02, 0.8); // E7
+        }, 2000);
+        
+        // Final applause wave
+        for (let i = 0; i < 30; i++) {
+            setTimeout(() => playNoise(ctx, 0.08), 2000 + i * 40);
+        }
     }
 }
 
@@ -59,6 +163,86 @@ function playTone(ctx, frequency, duration, type = 'sine') {
     
     oscillator.start(ctx.currentTime);
     oscillator.stop(ctx.currentTime + duration);
+}
+
+// Play firework explosion sound
+function playFirework(ctx) {
+    // Rising whistle
+    const whistle = ctx.createOscillator();
+    const whistleGain = ctx.createGain();
+    whistle.connect(whistleGain);
+    whistleGain.connect(ctx.destination);
+    whistle.frequency.setValueAtTime(400, ctx.currentTime);
+    whistle.frequency.exponentialRampToValueAtTime(2000, ctx.currentTime + 0.15);
+    whistleGain.gain.setValueAtTime(0.1, ctx.currentTime);
+    whistleGain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.15);
+    whistle.start(ctx.currentTime);
+    whistle.stop(ctx.currentTime + 0.15);
+    
+    // Explosion burst
+    setTimeout(() => {
+        const bufferSize = ctx.sampleRate * 0.3;
+        const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
+        const output = buffer.getChannelData(0);
+        
+        for (let i = 0; i < bufferSize; i++) {
+            output[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / bufferSize, 2);
+        }
+        
+        const explosion = ctx.createBufferSource();
+        explosion.buffer = buffer;
+        
+        const lowpass = ctx.createBiquadFilter();
+        lowpass.type = 'lowpass';
+        lowpass.frequency.value = 3000;
+        
+        const gainNode = ctx.createGain();
+        gainNode.gain.setValueAtTime(0.4, ctx.currentTime);
+        gainNode.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.3);
+        
+        explosion.connect(lowpass);
+        lowpass.connect(gainNode);
+        gainNode.connect(ctx.destination);
+        
+        explosion.start(ctx.currentTime);
+        
+        // Sparkle tones after explosion
+        for (let i = 0; i < 5; i++) {
+            setTimeout(() => {
+                playTone(ctx, 1000 + Math.random() * 2000, 0.1);
+            }, i * 30);
+        }
+    }, 150);
+}
+
+// Play noise burst (for applause effect)
+function playNoise(ctx, duration) {
+    const bufferSize = ctx.sampleRate * duration;
+    const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
+    const output = buffer.getChannelData(0);
+    
+    for (let i = 0; i < bufferSize; i++) {
+        output[i] = Math.random() * 2 - 1;
+    }
+    
+    const noise = ctx.createBufferSource();
+    noise.buffer = buffer;
+    
+    const bandpass = ctx.createBiquadFilter();
+    bandpass.type = 'bandpass';
+    bandpass.frequency.value = 1000 + Math.random() * 2000;
+    bandpass.Q.value = 0.5;
+    
+    const gainNode = ctx.createGain();
+    gainNode.gain.setValueAtTime(0.15, ctx.currentTime);
+    gainNode.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + duration);
+    
+    noise.connect(bandpass);
+    bandpass.connect(gainNode);
+    gainNode.connect(ctx.destination);
+    
+    noise.start(ctx.currentTime);
+    noise.stop(ctx.currentTime + duration);
 }
 
 // Navigate with delay for sound to play
@@ -357,8 +541,12 @@ function revealCard(day) {
     const card = document.getElementById(`card-${day}`);
     const canvas = document.getElementById(`canvas-${day}`);
     
-    // Play celebration sound
-    playSound('scratch');
+    // Play celebration sound (ultimate for day 8)
+    if (day === 8) {
+        playSound('ultimate');
+    } else {
+        playSound('reveal');
+    }
     
     // Mark as scratched
     scratchedCards[day] = true;

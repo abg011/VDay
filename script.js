@@ -318,6 +318,31 @@ function initializeCards() {
             }
         });
         
+        // Add triple-click on Part 2 timer for secret Part 2 unlock
+        const part2Timer = document.getElementById(`part2-timer-${day}`);
+        if (part2Timer) {
+            let part2Clicks = 0;
+            let part2ClickTimer;
+            
+            part2Timer.addEventListener('click', (e) => {
+                // If already unlocked normally, let the default handler work
+                if (part2Timer.classList.contains('unlocked')) return;
+                
+                part2Clicks++;
+                clearTimeout(part2ClickTimer);
+                part2ClickTimer = setTimeout(() => {
+                    part2Clicks = 0;
+                }, 500);
+                
+                // Triple click - secret Part 2 unlock!
+                if (part2Clicks >= 3) {
+                    secretUnlockPart2(day);
+                    part2Clicks = 0;
+                    e.stopPropagation();
+                }
+            });
+        }
+        
         if (scratchedCards[day]) {
             // Card was already scratched
             card.classList.add('scratched');
@@ -333,6 +358,32 @@ function initializeCards() {
             initScratchCanvas(day);
         }
     }
+}
+
+// Secret unlock Part 2 - triple click on Part 2 timer
+function secretUnlockPart2(day) {
+    const card = document.getElementById(`card-${day}`);
+    const part2Timer = document.getElementById(`part2-timer-${day}`);
+    
+    if (!card.classList.contains('scratched')) {
+        console.log('Scratch the card first!');
+        return;
+    }
+    
+    if (dateChoices[day]) {
+        // Already made a choice, just show it
+        openModal(day);
+        return;
+    }
+    
+    // Unlock Part 2
+    part2Timer.classList.add('unlocked');
+    part2Timer.innerHTML = `<span class="timer-icon">🔓</span><span class="timer-text">Part 2 secret unlock!</span>`;
+    
+    // Open Part 2 modal
+    openPart2Modal(day);
+    
+    console.log(`🔓 Day ${day} Part 2 secretly unlocked!`);
 }
 
 // Secret unlock function - triple click on day label

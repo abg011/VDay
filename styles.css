@@ -550,6 +550,70 @@ body {
     margin-top: 8px;
 }
 
+/* Part 2 Timer */
+.part2-timer {
+    background: linear-gradient(135deg, #fff0f5, #ffe4ec);
+    padding: 10px 15px;
+    border-radius: 15px;
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-size: 0.85rem;
+    color: #c44569;
+    font-weight: 500;
+    animation: pulse 2s ease-in-out infinite;
+}
+
+.part2-timer.unlocked {
+    background: linear-gradient(135deg, #d4edda, #c3e6cb);
+    color: #28a745;
+    cursor: pointer;
+}
+
+/* Date Options in Modal */
+.date-options {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin: 20px 0;
+}
+
+.date-option {
+    background: linear-gradient(135deg, #fff5f8, #ffe4ec);
+    border: 2px solid #ffc1e3;
+    padding: 15px 20px;
+    border-radius: 15px;
+    font-size: 1rem;
+    font-weight: 500;
+    color: #c44569;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: 'Poppins', sans-serif;
+}
+
+.date-option:hover {
+    background: linear-gradient(135deg, #ff6b9d, #c44569);
+    color: white;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(196, 69, 105, 0.3);
+}
+
+/* Confirmation Modal */
+.confirmation-emoji {
+    font-size: 5rem;
+    margin-bottom: 20px;
+    animation: bounce 1s ease-in-out infinite;
+}
+
+.confirmation-message {
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.8rem;
+    color: #c44569;
+    line-height: 1.4;
+}
+
 /* Locked Overlay */
 .scratch-overlay {
     position: absolute;

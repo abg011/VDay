@@ -254,7 +254,7 @@ function navigateTo(url) {
 
 // Configuration - Unlock dates for each card (Valentine Week: Feb 7-14, 2026)
 const unlockDates = {
-    1: new Date('2026-02-07T00:00:00'), // Rose Day
+    1: new Date('2026-02-07T00:00:00'), // Rose Day - Part 1
     2: new Date('2026-02-08T00:00:00'), // Propose Day
     3: new Date('2026-02-09T00:00:00'), // Chocolate Day
     4: new Date('2026-02-10T00:00:00'), // Teddy Day
@@ -263,6 +263,15 @@ const unlockDates = {
     7: new Date('2026-02-13T00:00:00'), // Kiss Day
     8: new Date('2026-02-14T00:00:00')  // Valentine's Day
 };
+
+// Part 2 unlock times (noon)
+const part2UnlockDates = {
+    2: new Date('2026-02-08T12:00:00') // Propose Day - Part 2 at noon
+};
+
+// Track if Part 2 has been viewed
+const part2Viewed = JSON.parse(localStorage.getItem('part2Viewed')) || {};
+const dateChoices = JSON.parse(localStorage.getItem('dateChoices')) || {};
 
 // Store scratched cards in localStorage
 const scratchedCards = JSON.parse(localStorage.getItem('scratchedCards')) || {};
@@ -409,6 +418,50 @@ function updateTimer(day) {
         }
         
         timerText.textContent = timeString;
+    }
+    
+    // Update Part 2 timer if exists
+    updatePart2Timer(day);
+}
+
+// Update Part 2 timer for cards that have it
+function updatePart2Timer(day) {
+    const part2Timer = document.getElementById(`part2-timer-${day}`);
+    if (!part2Timer) return;
+    
+    const card = document.getElementById(`card-${day}`);
+    const hasPart2 = card.dataset.hasPart2 === 'true';
+    if (!hasPart2) return;
+    
+    const now = new Date();
+    const part2Date = part2UnlockDates[day];
+    
+    // Only show Part 2 timer if card is scratched
+    if (!scratchedCards[day]) {
+        part2Timer.style.display = 'none';
+        return;
+    }
+    
+    // If user already made a choice, show that instead
+    if (dateChoices[day]) {
+        part2Timer.style.display = 'flex';
+        part2Timer.classList.add('unlocked');
+        part2Timer.innerHTML = `<span class="timer-icon">💖</span><span class="timer-text">Date: ${dateChoices[day].name}</span>`;
+        part2Timer.onclick = () => openModal(day);
+        return;
+    }
+    
+    part2Timer.style.display = 'flex';
+    
+    if (now >= part2Date) {
+        part2Timer.classList.add('unlocked');
+        part2Timer.innerHTML = `<span class="timer-icon">🎁</span><span class="timer-text">Part 2 is ready! Tap to reveal!</span>`;
+        part2Timer.onclick = () => openModal(day);
+    } else {
+        part2Timer.classList.remove('unlocked');
+        const timeLeft = getTimeRemaining(part2Date);
+        part2Timer.innerHTML = `<span class="timer-icon">🎁</span><span class="timer-text">Part 2 unlocks at noon (${timeLeft})</span>`;
+        part2Timer.onclick = null;
     }
 }
 
@@ -577,6 +630,22 @@ function openModal(day) {
     const card = document.getElementById(`card-${day}`);
     if (!card.classList.contains('scratched')) return;
     
+    const hasPart2 = card.dataset.hasPart2 === 'true';
+    const now = new Date();
+    const part2Unlocked = part2UnlockDates[day] && now >= part2UnlockDates[day];
+    
+    // Check if user already made a choice for this day
+    if (dateChoices[day]) {
+        showConfirmationModal(dateChoices[day]);
+        return;
+    }
+    
+    // If Part 2 is unlocked and not viewed yet, show Part 2
+    if (hasPart2 && part2Unlocked && scratchedCards[day]) {
+        openPart2Modal(day);
+        return;
+    }
+    
     const emoji = card.dataset.emoji;
     const title = card.dataset.title;
     const message = card.dataset.message;
@@ -590,7 +659,18 @@ function openModal(day) {
     
     modalEmoji.textContent = emoji;
     modalTitle.textContent = title;
-    modalMessage.innerHTML = message.replace(/\n/g, '<br>');
+    
+    let messageHtml = message.replace(/\n/g, '<br>');
+    
+    // Add Part 2 teaser if applicable
+    if (hasPart2 && !part2Unlocked) {
+        const timeLeft = getTimeRemaining(part2UnlockDates[day]);
+        messageHtml += `<br><br><span style="color: #ff6b9d; font-weight: 600;">🎁 Part 2 unlocks at noon! (${timeLeft})</span>`;
+    } else if (hasPart2 && part2Unlocked) {
+        messageHtml += `<br><br><span style="color: #28a745; font-weight: 600;">🎉 Part 2 is ready! Close this to see it!</span>`;
+    }
+    
+    modalMessage.innerHTML = messageHtml;
     
     if (isSpecial) {
         modalContent.classList.add('special-modal');
@@ -601,10 +681,102 @@ function openModal(day) {
     overlay.classList.add('active');
 }
 
+// Open Part 2 modal with date options
+function openPart2Modal(day) {
+    const card = document.getElementById(`card-${day}`);
+    const emoji = card.dataset.part2Emoji;
+    const title = card.dataset.part2Title;
+    const message = card.dataset.part2Message;
+    const options = JSON.parse(card.dataset.options);
+    
+    const overlay = document.getElementById('modal-overlay');
+    const modalContent = document.getElementById('modal-content');
+    const modalEmoji = document.getElementById('modal-emoji');
+    const modalTitle = document.getElementById('modal-title');
+    const modalMessage = document.getElementById('modal-message');
+    
+    modalEmoji.textContent = emoji;
+    modalTitle.textContent = title;
+    
+    let messageHtml = message.replace(/\n/g, '<br>');
+    messageHtml += '<div class="date-options">';
+    
+    options.forEach(option => {
+        messageHtml += `<button class="date-option" onclick="selectDateOption(${day}, '${option.id}', '${option.name}')">${option.name}</button>`;
+    });
+    
+    messageHtml += '</div>';
+    
+    modalMessage.innerHTML = messageHtml;
+    modalContent.classList.remove('special-modal');
+    
+    overlay.classList.add('active');
+    
+    // Play reveal sound
+    playSound('reveal');
+}
+
+// Handle date option selection
+function selectDateOption(day, optionId, optionName) {
+    // Save the choice
+    dateChoices[day] = { id: optionId, name: optionName };
+    localStorage.setItem('dateChoices', JSON.stringify(dateChoices));
+    
+    // Play celebration sound
+    playSound('omg');
+    
+    // Show confirmation
+    showConfirmationModal(dateChoices[day]);
+}
+
+// Show confirmation modal after selection
+function showConfirmationModal(choice) {
+    const overlay = document.getElementById('modal-overlay');
+    const modalContent = document.getElementById('modal-content');
+    const modalEmoji = document.getElementById('modal-emoji');
+    const modalTitle = document.getElementById('modal-title');
+    const modalMessage = document.getElementById('modal-message');
+    
+    modalEmoji.textContent = '💖';
+    modalEmoji.classList.add('confirmation-emoji');
+    modalTitle.textContent = "It's a Date!";
+    
+    const cleanName = choice.name.replace(/^[^\s]+\s/, ''); // Remove emoji prefix
+    modalMessage.innerHTML = `<p class="confirmation-message">Get ready to dress up for your date at<br><strong>${cleanName}</strong>! 💕</p>`;
+    
+    modalContent.classList.remove('special-modal');
+    overlay.classList.add('active');
+    
+    // Create confetti
+    setTimeout(() => {
+        createConfetti(modalContent);
+    }, 300);
+}
+
+// Get time remaining string
+function getTimeRemaining(targetDate) {
+    const now = new Date();
+    const diff = targetDate - now;
+    
+    if (diff <= 0) return 'Now!';
+    
+    const hours = Math.floor(diff / (1000 * 60 * 60));
+    const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+    
+    if (hours > 0) {
+        return `${hours}h ${minutes}m`;
+    }
+    return `${minutes}m`;
+}
+
 // Close modal popup
 function closeModal() {
     const overlay = document.getElementById('modal-overlay');
     overlay.classList.remove('active');
+    
+    // Reset emoji class
+    const modalEmoji = document.getElementById('modal-emoji');
+    modalEmoji.classList.remove('confirmation-emoji');
 }
 
 // Close modal when clicking outside

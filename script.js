@@ -753,7 +753,11 @@ function openPart2Modal(day) {
     messageHtml += '<div class="date-options">';
     
     options.forEach(option => {
-        messageHtml += `<button class="date-option" onclick="selectDateOption(${day}, '${option.id}', '${option.name}')">${option.name}</button>`;
+        if (option.link) {
+            messageHtml += `<button class="date-option" onclick="selectDateOption(${day}, '${option.id}', '${option.name}')">${option.name} <a href="${option.link}" target="_blank" onclick="event.stopPropagation()" style="font-size: 0.8rem; margin-left: 5px;">📍</a></button>`;
+        } else {
+            messageHtml += `<button class="date-option" onclick="selectDateOption(${day}, '${option.id}', '${option.name}')">${option.name}</button>`;
+        }
     });
     
     messageHtml += '</div>';

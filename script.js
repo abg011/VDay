@@ -850,10 +850,13 @@ function spinValentineWheel() {
     const wheel = document.getElementById('valentine-wheel');
     const spinBtn = document.getElementById('spin-wheel-btn');
     const wheelResult = document.getElementById('wheel-result');
+    const popup = document.getElementById('wheel-result-popup');
+    const popupPlace = document.getElementById('wheel-result-popup-place');
     if (!wheel || spinBtn.disabled) return;
 
     spinBtn.disabled = true;
     wheelResult.textContent = '';
+    if (popup) popup.setAttribute('hidden', '');
 
     const fullSpins = 5 + Math.floor(Math.random() * 2);
     const totalRotation = fullSpins * 360;
@@ -865,14 +868,32 @@ function spinValentineWheel() {
         playSound('reveal');
         wheelResult.innerHTML = '🎉 <strong>Bharatiya Mall of Bengaluru!</strong><br>That\'s where we\'re getting the dress — and Step 2 is there too! 💕';
         spinBtn.disabled = false;
+        if (popup && popupPlace) {
+            popupPlace.textContent = 'Bharatiya Mall of Bengaluru';
+            popup.removeAttribute('hidden');
+            popup.setAttribute('aria-hidden', 'false');
+        }
     }, 4200);
 }
+
+function closeWheelResultPopup() {
+    const popup = document.getElementById('wheel-result-popup');
+    if (popup) {
+        popup.setAttribute('hidden', '');
+        popup.setAttribute('aria-hidden', 'true');
+    }
+}
+
+document.getElementById('wheel-result-popup')?.addEventListener('click', function(e) {
+    if (e.target === this) closeWheelResultPopup();
+});
 
 // Close modal popup
 function closeModal() {
     const overlay = document.getElementById('modal-overlay');
     overlay.classList.remove('active');
     document.getElementById('modal-wheel-wrap').style.display = 'none';
+    closeWheelResultPopup();
 
     // Reset emoji class
     const modalEmoji = document.getElementById('modal-emoji');

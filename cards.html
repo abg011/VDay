@@ -22,25 +22,37 @@
     <!-- Popup Modal -->
     <div class="modal-overlay" id="modal-overlay">
         <div class="modal-content" id="modal-content">
-            <div class="modal-emoji" id="modal-emoji">🌹</div>
-            <h2 class="modal-title" id="modal-title">Happy Rose Day!</h2>
-            <p class="modal-message" id="modal-message">Message here</p>
-            <div class="modal-wheel-wrap" id="modal-wheel-wrap" style="display: none;">
-                <div class="wheel-pointer">▼</div>
-                <div class="wheel-container">
-                    <div class="wheel" id="valentine-wheel">
-                        <div class="wheel-segment" data-index="0">Bharatiya Mall of Bengaluru</div>
-                        <div class="wheel-segment" data-index="1">Orion Mall</div>
-                        <div class="wheel-segment" data-index="2">Phoenix Mall of Asia</div>
-                        <div class="wheel-segment" data-index="3">Mantri Square Mall</div>
-                        <div class="wheel-segment" data-index="4">Forum Mall</div>
-                        <div class="wheel-segment" data-index="5">Garuda Mall</div>
-                    </div>
+            <div class="modal-scroll-area">
+                <div class="modal-emoji" id="modal-emoji">🌹</div>
+                <h2 class="modal-title" id="modal-title">Happy Rose Day!</h2>
+                <div class="modal-message-wrap">
+                    <p class="modal-message" id="modal-message">Message here</p>
                 </div>
-                <button type="button" class="spin-wheel-btn" id="spin-wheel-btn">Spin the wheel! 🎡</button>
-                <p class="wheel-result" id="wheel-result"></p>
+                <div class="modal-wheel-wrap" id="modal-wheel-wrap" style="display: none;">
+                    <div class="wheel-pointer" aria-hidden="true">▼</div>
+                    <div class="wheel-container">
+                        <div class="wheel" id="valentine-wheel">
+                            <div class="wheel-segment" data-index="0">Bharatiya Mall</div>
+                            <div class="wheel-segment" data-index="1">Orion Mall</div>
+                            <div class="wheel-segment" data-index="2">Phoenix Mall</div>
+                            <div class="wheel-segment" data-index="3">Mantri Square</div>
+                            <div class="wheel-segment" data-index="4">Forum Mall</div>
+                            <div class="wheel-segment" data-index="5">Garuda Mall</div>
+                        </div>
+                    </div>
+                    <button type="button" class="spin-wheel-btn" id="spin-wheel-btn">Spin the wheel! 🎡</button>
+                    <p class="wheel-result" id="wheel-result"></p>
+                </div>
             </div>
             <button class="modal-close" onclick="closeModal()">Close 💕</button>
+        </div>
+        <div class="wheel-result-popup" id="wheel-result-popup" role="dialog" aria-labelledby="wheel-popup-title" aria-modal="true" hidden>
+            <div class="wheel-result-popup-inner">
+                <p class="wheel-result-popup-title" id="wheel-popup-title">You're going to:</p>
+                <p class="wheel-result-popup-place" id="wheel-result-popup-place">Bharatiya Mall of Bengaluru</p>
+                <p class="wheel-result-popup-sub">Dress shopping + Step 2 — both here! 💕</p>
+                <button type="button" class="wheel-result-popup-btn" id="wheel-result-popup-dismiss" onclick="closeWheelResultPopup()">Got it!</button>
+            </div>
         </div>
     </div>
 

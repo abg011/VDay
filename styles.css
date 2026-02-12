@@ -578,78 +578,49 @@ body {
     box-shadow: 0 10px 30px rgba(196, 69, 105, 0.4);
 }
 
-/* Valentine's Day spin wheel */
+/* Valentine's Day mall picker (slot-style) */
 .modal-wheel-wrap {
     margin-top: 20px;
     padding-top: 20px;
     border-top: 1px solid rgba(196, 69, 105, 0.2);
 }
 
-.wheel-pointer {
-    color: #c44569;
-    font-size: 1.75rem;
-    margin-bottom: -10px;
-    z-index: 2;
-    position: relative;
-    filter: drop-shadow(0 1px 2px rgba(0,0,0,0.2));
-    line-height: 1;
+.mall-picker-label {
+    font-size: 0.95rem;
+    color: #666;
+    margin: 0 0 12px;
 }
 
-.wheel-container {
-    position: relative;
-    width: 220px;
-    height: 220px;
-    margin: 0 auto 15px;
+.mall-picker-frame {
+    background: linear-gradient(145deg, #fff8fa, #ffe8ef);
+    border: 3px solid rgba(196, 69, 105, 0.35);
+    border-radius: 16px;
+    padding: 20px 24px;
+    margin: 0 auto 10px;
+    max-width: 280px;
+    box-shadow: inset 0 2px 8px rgba(196, 69, 105, 0.08);
 }
 
-.wheel {
-    width: 200px;
-    height: 200px;
-    border-radius: 50%;
-    position: absolute;
-    left: 10px;
-    top: 10px;
-    background: conic-gradient(
-        from -30deg,
-        #ff6b9d 0deg 57deg,
-        #fff 57deg 60deg,
-        #ff8a80 60deg 117deg,
-        #fff 117deg 120deg,
-        #ffc1e3 120deg 177deg,
-        #fff 177deg 180deg,
-        #c44569 180deg 237deg,
-        #fff 237deg 240deg,
-        #ffd700 240deg 297deg,
-        #fff 297deg 300deg,
-        #ff9eb5 300deg 357deg,
-        #fff 357deg 360deg
-    );
-    box-shadow: 0 4px 20px rgba(0,0,0,0.15), inset 0 0 0 4px rgba(255,255,255,0.5);
-    border: 4px solid #fff;
-}
-
-.wheel-segment {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    width: 52px;
-    margin-left: -26px;
-    margin-top: -8px;
-    text-align: center;
-    font-size: 0.6rem;
+.mall-picker-window {
+    font-size: 1.15rem;
     font-weight: 700;
-    color: #333;
-    line-height: 1.15;
-    pointer-events: none;
-    text-shadow: 0 0 2px rgba(255,255,255,0.8);
+    color: #c44569;
+    text-align: center;
+    line-height: 1.4;
+    min-height: 1.5em;
+    transition: transform 0.05s ease;
 }
 
-.wheel-segment:nth-child(1) { transform: rotate(30deg) translateY(-72px) rotate(-30deg); }
-.wheel-segment:nth-child(2) { transform: rotate(90deg) translateY(-72px) rotate(-90deg); }
-.wheel-segment:nth-child(3) { transform: rotate(150deg) translateY(-72px) rotate(-150deg); }
-.wheel-segment:nth-child(4) { transform: rotate(210deg) translateY(-72px) rotate(-210deg); }
-.wheel-segment:nth-child(5) { transform: rotate(270deg) translateY(-72px) rotate(-270deg); }
-.wheel-segment:nth-child(6) { transform: rotate(330deg) translateY(-72px) rotate(-330deg); }
+.mall-picker-window.mall-picker-tick {
+    transform: scale(1.03);
+}
+
+.mall-picker-hint {
+    font-size: 0.7rem;
+    color: #999;
+    margin: 0 0 14px;
+    line-height: 1.4;
+}
 
 .spin-wheel-btn {
     background: linear-gradient(135deg, #ff6b9d 0%, #c44569 100%);

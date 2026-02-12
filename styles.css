@@ -535,6 +535,101 @@ body {
     box-shadow: 0 10px 30px rgba(196, 69, 105, 0.4);
 }
 
+/* Valentine's Day spin wheel */
+.modal-wheel-wrap {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(196, 69, 105, 0.2);
+}
+
+.wheel-pointer {
+    color: #c44569;
+    font-size: 1.5rem;
+    margin-bottom: -8px;
+    z-index: 2;
+    position: relative;
+}
+
+.wheel-container {
+    position: relative;
+    width: 220px;
+    height: 220px;
+    margin: 0 auto 15px;
+}
+
+.wheel {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    position: absolute;
+    left: 10px;
+    top: 10px;
+    background: conic-gradient(
+        from -30deg,
+        #ff6b9d 0deg 60deg,
+        #ff8a80 60deg 120deg,
+        #ffc1e3 120deg 180deg,
+        #c44569 180deg 240deg,
+        #ffd700 240deg 300deg,
+        #ff9eb5 300deg 360deg
+    );
+    box-shadow: 0 4px 20px rgba(0,0,0,0.15), inset 0 0 0 4px rgba(255,255,255,0.5);
+    border: 4px solid #fff;
+}
+
+.wheel-segment {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 72px;
+    margin-left: -36px;
+    margin-top: -10px;
+    text-align: center;
+    font-size: 0.65rem;
+    font-weight: 600;
+    color: #333;
+    line-height: 1.2;
+    pointer-events: none;
+}
+
+.wheel-segment:nth-child(1) { transform: rotate(30deg) translateY(-85px) rotate(-30deg); }
+.wheel-segment:nth-child(2) { transform: rotate(90deg) translateY(-85px) rotate(-90deg); }
+.wheel-segment:nth-child(3) { transform: rotate(150deg) translateY(-85px) rotate(-150deg); }
+.wheel-segment:nth-child(4) { transform: rotate(210deg) translateY(-85px) rotate(-210deg); }
+.wheel-segment:nth-child(5) { transform: rotate(270deg) translateY(-85px) rotate(-270deg); }
+.wheel-segment:nth-child(6) { transform: rotate(330deg) translateY(-85px) rotate(-330deg); }
+
+.spin-wheel-btn {
+    background: linear-gradient(135deg, #ff6b9d 0%, #c44569 100%);
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 50px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: 'Poppins', sans-serif;
+    margin-bottom: 12px;
+    transition: transform 0.2s, opacity 0.2s;
+}
+
+.spin-wheel-btn:hover:not(:disabled) {
+    transform: scale(1.05);
+}
+
+.spin-wheel-btn:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+.wheel-result {
+    font-size: 0.95rem;
+    color: #c44569;
+    line-height: 1.5;
+    margin: 0;
+    min-height: 2.5em;
+}
+
 .scratch-card.scratched {
     cursor: pointer;
 }

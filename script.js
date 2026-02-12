@@ -722,6 +722,20 @@ function openModal(day) {
     }
     
     modalMessage.innerHTML = messageHtml;
+
+    const wheelWrap = document.getElementById('modal-wheel-wrap');
+    const wheelResult = document.getElementById('wheel-result');
+    const spinBtn = document.getElementById('spin-wheel-btn');
+    if (day === 8) {
+        wheelWrap.style.display = 'block';
+        wheelResult.textContent = '';
+        const wheel = document.getElementById('valentine-wheel');
+        if (wheel) wheel.style.transform = 'rotate(0deg)';
+        spinBtn.disabled = false;
+        spinBtn.onclick = () => spinValentineWheel();
+    } else {
+        wheelWrap.style.display = 'none';
+    }
     
     if (isSpecial) {
         modalContent.classList.add('special-modal');
@@ -831,11 +845,35 @@ function getTimeRemaining(targetDate) {
     return `${minutes}m`;
 }
 
+// Valentine's Day wheel - always lands on Bharatiya Mall of Bengaluru (index 0)
+function spinValentineWheel() {
+    const wheel = document.getElementById('valentine-wheel');
+    const spinBtn = document.getElementById('spin-wheel-btn');
+    const wheelResult = document.getElementById('wheel-result');
+    if (!wheel || spinBtn.disabled) return;
+
+    spinBtn.disabled = true;
+    wheelResult.textContent = '';
+
+    const fullSpins = 5 + Math.floor(Math.random() * 2);
+    const totalRotation = fullSpins * 360;
+
+    wheel.style.transition = 'transform 4s cubic-bezier(0.2, 0.8, 0.3, 1)';
+    wheel.style.transform = `rotate(${totalRotation}deg)`;
+
+    setTimeout(() => {
+        playSound('reveal');
+        wheelResult.innerHTML = '🎉 <strong>Bharatiya Mall of Bengaluru!</strong><br>That\'s where we\'re getting the dress — and Step 2 is there too! 💕';
+        spinBtn.disabled = false;
+    }, 4200);
+}
+
 // Close modal popup
 function closeModal() {
     const overlay = document.getElementById('modal-overlay');
     overlay.classList.remove('active');
-    
+    document.getElementById('modal-wheel-wrap').style.display = 'none';
+
     // Reset emoji class
     const modalEmoji = document.getElementById('modal-emoji');
     modalEmoji.classList.remove('confirmation-emoji');

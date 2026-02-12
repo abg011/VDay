@@ -25,6 +25,21 @@
             <div class="modal-emoji" id="modal-emoji">🌹</div>
             <h2 class="modal-title" id="modal-title">Happy Rose Day!</h2>
             <p class="modal-message" id="modal-message">Message here</p>
+            <div class="modal-wheel-wrap" id="modal-wheel-wrap" style="display: none;">
+                <div class="wheel-pointer">▼</div>
+                <div class="wheel-container">
+                    <div class="wheel" id="valentine-wheel">
+                        <div class="wheel-segment" data-index="0">Bharatiya Mall of Bengaluru</div>
+                        <div class="wheel-segment" data-index="1">Orion Mall</div>
+                        <div class="wheel-segment" data-index="2">Phoenix Mall of Asia</div>
+                        <div class="wheel-segment" data-index="3">Mantri Square Mall</div>
+                        <div class="wheel-segment" data-index="4">Forum Mall</div>
+                        <div class="wheel-segment" data-index="5">Garuda Mall</div>
+                    </div>
+                </div>
+                <button type="button" class="spin-wheel-btn" id="spin-wheel-btn">Spin the wheel! 🎡</button>
+                <p class="wheel-result" id="wheel-result"></p>
+            </div>
             <button class="modal-close" onclick="closeModal()">Close 💕</button>
         </div>
     </div>
@@ -255,11 +270,14 @@ Hoping I get a kiss at the end of the night.. 💋">
                 <div class="scratch-card locked" id="card-8"
                      data-emoji="🎵"
                      data-title="Happy Valentine's Day!"
-                     data-message="The grand finale is here! 🎉
+                     data-message="I've been counting the hours. Tonight is yours — and I've planned something I hope you'll never forget. 💕
 
-Dress up baby & make sure you have comfy footwear... It's going to be a night of music, dancing & unforgettable memories!
+Two steps. One evening. No spoilers... except this:
 
-I love you endlessly! 💖"
+First, we find you something that makes you feel as beautiful as you are.
+Then... you'll see. Some things are better left as a surprise until the very last moment.
+
+Spin the wheel when you're ready — it'll point us where to start. ✨"
                      data-special="true">
                     <canvas class="scratch-canvas" id="canvas-8"></canvas>
                     <div class="card-content special-content" id="content-8">

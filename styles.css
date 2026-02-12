@@ -739,6 +739,128 @@ body {
     box-shadow: 0 6px 20px rgba(196, 69, 105, 0.4);
 }
 
+/* Concert reveal (Step 2 – Valentine's Day) */
+.concert-reveal-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 1002;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.75);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.concert-reveal-overlay:not([hidden]) {
+    opacity: 1;
+    visibility: visible;
+}
+
+.concert-reveal-overlay[hidden] {
+    display: flex !important;
+    pointer-events: none;
+}
+
+.concert-reveal-inner {
+    background: linear-gradient(145deg, #1a0a0f, #2d1520);
+    border-radius: 24px;
+    padding: 28px 24px;
+    max-width: 360px;
+    width: 92%;
+    text-align: center;
+    box-shadow: 0 25px 60px rgba(0,0,0,0.5), 0 0 0 3px rgba(255, 107, 157, 0.4);
+    animation: concertRevealIn 0.4s ease;
+}
+
+@keyframes concertRevealIn {
+    from {
+        transform: scale(0.85);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.concert-reveal-title {
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.6rem;
+    color: #ffc1e3;
+    margin: 0 0 8px;
+}
+
+.concert-reveal-message {
+    font-size: 0.95rem;
+    color: rgba(255, 255, 255, 0.85);
+    margin: 0 0 18px;
+    line-height: 1.5;
+}
+
+.concert-poster-wrap {
+    position: relative;
+    border-radius: 16px;
+    overflow: hidden;
+    margin-bottom: 14px;
+    background: rgba(255, 255, 255, 0.08);
+    min-height: 180px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.concert-poster {
+    width: 100%;
+    height: auto;
+    max-height: 320px;
+    object-fit: contain;
+    display: block;
+}
+
+.concert-poster-fallback {
+    display: none;
+    position: absolute;
+    inset: 0;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #ff6b9d;
+    text-align: center;
+    line-height: 1.4;
+    padding: 24px;
+}
+
+.concert-poster-fallback.show {
+    display: flex;
+}
+
+.concert-reveal-sub {
+    font-size: 0.9rem;
+    color: rgba(255, 193, 227, 0.9);
+    margin: 0 0 20px;
+}
+
+.concert-reveal-close {
+    background: linear-gradient(135deg, #ff6b9d 0%, #c44569 100%);
+    color: white;
+    border: none;
+    padding: 14px 32px;
+    border-radius: 50px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: 'Poppins', sans-serif;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.concert-reveal-close:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 25px rgba(196, 69, 105, 0.5);
+}
+
 .scratch-card.scratched {
     cursor: pointer;
 }

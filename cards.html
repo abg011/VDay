@@ -48,6 +48,18 @@
                 <button type="button" class="wheel-result-popup-btn" id="wheel-result-popup-dismiss" onclick="closeWheelResultPopup()">Got it!</button>
             </div>
         </div>
+        <div class="concert-reveal-overlay" id="concert-reveal-overlay" role="dialog" aria-label="Concert reveal" hidden>
+            <div class="concert-reveal-inner">
+                <h2 class="concert-reveal-title">Step 2 — Tonight's surprise 🎵</h2>
+                <p class="concert-reveal-message">We're ending the evening with live music. See you there! 💕</p>
+                <div class="concert-poster-wrap">
+                    <img src="images/faheem-abdullah-bengaluru-poster.jpg" alt="Faheem Abdullah Bengaluru concert poster" class="concert-poster" id="concert-poster" onerror="this.style.display='none'; document.getElementById('concert-poster-fallback').classList.add('show');">
+                    <div class="concert-poster-fallback" id="concert-poster-fallback">Faheem Abdullah<br>Bengaluru</div>
+                </div>
+                <p class="concert-reveal-sub">Faheem Abdullah — Live in Bengaluru 🎤</p>
+                <button type="button" class="concert-reveal-close" onclick="closeConcertReveal()">Love it! 💖</button>
+            </div>
+        </div>
     </div>
 
     <div class="container cards-container">
@@ -284,7 +296,8 @@ First, we find you something that makes you feel as beautiful as you are.
 Then... you'll see. Some things are better left as a surprise until the very last moment.
 
 Spin the wheel when you're ready — it'll point us where to start. ✨"
-                     data-special="true">
+                     data-special="true"
+                     data-has-part2="true">
                     <canvas class="scratch-canvas" id="canvas-8"></canvas>
                     <div class="card-content special-content" id="content-8">
                         <div class="card-emoji">🎵</div>
@@ -295,6 +308,10 @@ Spin the wheel when you're ready — it'll point us where to start. ✨"
                         <span>🔒</span>
                         <p>Unlocks Soon!</p>
                     </div>
+                </div>
+                <div class="part2-timer" id="part2-timer-8" style="display: none;">
+                    <span class="timer-icon">🎁</span>
+                    <span class="timer-text">Step 2 unlocks at 3 PM</span>
                 </div>
             </div>
         </div>

@@ -264,9 +264,10 @@ const unlockDates = {
     8: new Date('2026-02-14T00:00:00')  // Valentine's Day
 };
 
-// Part 2 unlock times (noon)
+// Part 2 unlock times
 const part2UnlockDates = {
-    2: new Date('2026-02-08T12:00:00') // Propose Day - Part 2 at noon
+    2: new Date('2026-02-08T12:00:00'), // Propose Day - Part 2 at noon
+    8: new Date('2026-02-14T15:00:00')   // Valentine's Day - Step 2 at 3 PM IST
 };
 
 // Track if Part 2 has been viewed
@@ -370,19 +371,22 @@ function secretUnlockPart2(day) {
         return;
     }
     
+    if (day === 8) {
+        part2Timer.classList.add('unlocked');
+        part2Timer.innerHTML = `<span class="timer-icon">🔓</span><span class="timer-text">Step 2 secret unlock!</span>`;
+        openConcertReveal();
+        console.log('🔓 Day 8 Step 2 secretly unlocked!');
+        return;
+    }
+    
     if (dateChoices[day]) {
-        // Already made a choice, just show it
         openModal(day);
         return;
     }
     
-    // Unlock Part 2
     part2Timer.classList.add('unlocked');
     part2Timer.innerHTML = `<span class="timer-icon">🔓</span><span class="timer-text">Part 2 secret unlock!</span>`;
-    
-    // Open Part 2 modal
     openPart2Modal(day);
-    
     console.log(`🔓 Day ${day} Part 2 secretly unlocked!`);
 }
 
@@ -490,6 +494,24 @@ function updatePart2Timer(day) {
     // Only show Part 2 timer if card is scratched
     if (!scratchedCards[day]) {
         part2Timer.style.display = 'none';
+        return;
+    }
+    
+    // Day 8: Step 2 is concert reveal (no date choice)
+    if (day === 8) {
+        part2Timer.style.display = 'flex';
+        if (now >= part2Date) {
+            part2Timer.classList.add('unlocked');
+            part2Timer.innerHTML = part2Viewed[8]
+                ? `<span class="timer-icon">🎵</span><span class="timer-text">Step 2 revealed! Tap to see again</span>`
+                : `<span class="timer-icon">🎁</span><span class="timer-text">Step 2 is ready! Tap to reveal!</span>`;
+            part2Timer.onclick = () => openConcertReveal();
+        } else {
+            part2Timer.classList.remove('unlocked');
+            const timeLeft = getTimeRemaining(part2Date);
+            part2Timer.innerHTML = `<span class="timer-icon">🎁</span><span class="timer-text">Step 2 unlocks at 3 PM (${timeLeft})</span>`;
+            part2Timer.onclick = null;
+        }
         return;
     }
     
@@ -693,7 +715,11 @@ function openModal(day) {
     
     // If Part 2 is unlocked and not viewed yet, show Part 2
     if (hasPart2 && part2Unlocked && scratchedCards[day]) {
-        openPart2Modal(day);
+        if (day === 8) {
+            openConcertReveal();
+        } else {
+            openPart2Modal(day);
+        }
         return;
     }
     
@@ -716,9 +742,10 @@ function openModal(day) {
     // Add Part 2 teaser if applicable
     if (hasPart2 && !part2Unlocked) {
         const timeLeft = getTimeRemaining(part2UnlockDates[day]);
-        messageHtml += `<br><br><span style="color: #ff6b9d; font-weight: 600;">🎁 Part 2 unlocks at noon! (${timeLeft})</span>`;
+        const timeLabel = day === 8 ? '3 PM' : 'noon';
+        messageHtml += `<br><br><span style="color: #ff6b9d; font-weight: 600;">🎁 Step 2 unlocks at ${timeLabel}! (${timeLeft})</span>`;
     } else if (hasPart2 && part2Unlocked) {
-        messageHtml += `<br><br><span style="color: #28a745; font-weight: 600;">🎉 Part 2 is ready! Close this to see it!</span>`;
+        messageHtml += `<br><br><span style="color: #28a745; font-weight: 600;">🎉 Step 2 is ready! Close this to see it!</span>`;
     }
     
     modalMessage.innerHTML = messageHtml;
@@ -806,6 +833,37 @@ function selectDateOption(day, optionId, optionName) {
     // Show confirmation
     showConfirmationModal(dateChoices[day]);
 }
+
+// Valentine's Day Step 2: Concert reveal (Faheem Abdullah Bengaluru)
+function openConcertReveal() {
+    part2Viewed[8] = true;
+    localStorage.setItem('part2Viewed', JSON.stringify(part2Viewed));
+    
+    const overlay = document.getElementById('concert-reveal-overlay');
+    if (!overlay) return;
+    overlay.removeAttribute('hidden');
+    overlay.setAttribute('aria-hidden', 'false');
+    
+    playSound('ultimate');
+    const inner = overlay.querySelector('.concert-reveal-inner');
+    if (inner) {
+        setTimeout(() => createConfetti(inner), 400);
+    }
+    
+    updatePart2Timer(8);
+}
+
+function closeConcertReveal() {
+    const overlay = document.getElementById('concert-reveal-overlay');
+    if (overlay) {
+        overlay.setAttribute('hidden', '');
+        overlay.setAttribute('aria-hidden', 'true');
+    }
+}
+
+document.getElementById('concert-reveal-overlay')?.addEventListener('click', function(e) {
+    if (e.target === this) closeConcertReveal();
+});
 
 // Show confirmation modal after selection
 function showConfirmationModal(choice) {

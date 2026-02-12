@@ -332,25 +332,24 @@ function initializeCards() {
         if (part2Timer) {
             let part2Clicks = 0;
             let part2ClickTimer;
-            
-            part2Timer.addEventListener('click', (e) => {
-                // If already unlocked normally, let the default handler work
+            let lastTapTime = 0;
+            function countPart2Tap(e) {
                 if (part2Timer.classList.contains('unlocked')) return;
-                
+                const now = Date.now();
+                if (now - lastTapTime < 200) return; // ignore duplicate touch+click from same tap
+                lastTapTime = now;
                 part2Clicks++;
                 clearTimeout(part2ClickTimer);
-                part2ClickTimer = setTimeout(() => {
-                    part2Clicks = 0;
-                }, 700);
-                
-                // Triple click - secret Part 2 unlock! (3 taps within 700ms)
+                part2ClickTimer = setTimeout(() => { part2Clicks = 0; }, 800);
                 if (part2Clicks >= 3) {
                     secretUnlockPart2(day);
                     part2Clicks = 0;
                     e.preventDefault();
                     e.stopPropagation();
                 }
-            });
+            }
+            part2Timer.addEventListener('click', countPart2Tap);
+            part2Timer.addEventListener('touchend', countPart2Tap, { passive: false });
         }
         
         if (scratchedCards[day]) {
@@ -513,7 +512,6 @@ function updatePart2Timer(day) {
             return;
         }
         part2Timer.style.display = 'flex';
-        const hint = '<span class="part2-timer-hint">(triple-tap here to unlock early)</span>';
         if (now >= part2Date) {
             part2Timer.classList.add('unlocked');
             part2Timer.innerHTML = part2Viewed[8]
@@ -523,7 +521,7 @@ function updatePart2Timer(day) {
         } else {
             part2Timer.classList.remove('unlocked');
             const timeLeft = getTimeRemaining(part2Date);
-            part2Timer.innerHTML = `<span class="timer-icon">🎁</span><span class="timer-text">Step 2 unlocks at 3 PM (${timeLeft})</span>${hint}`;
+            part2Timer.innerHTML = `<span class="timer-icon">🎁</span><span class="timer-text">Step 2 unlocks at 3 PM (${timeLeft})</span>`;
             part2Timer.onclick = null;
         }
         return;
@@ -753,13 +751,12 @@ function openModal(day) {
     
     let messageHtml = message.replace(/\n/g, '<br>');
     
-    // Add Part 2 teaser if applicable
-    if (hasPart2 && !part2Unlocked) {
+    // Add Part 2 teaser if applicable (Day 8: no teaser in modal — Step 2 timer appears after spin)
+    if (day !== 8 && hasPart2 && !part2Unlocked) {
         const timeLeft = getTimeRemaining(part2UnlockDates[day]);
-        const timeLabel = day === 8 ? '3 PM' : 'noon';
-        messageHtml += `<br><br><span style="color: #ff6b9d; font-weight: 600;">🎁 Step 2 unlocks at ${timeLabel}! (${timeLeft})</span>`;
-    } else if (hasPart2 && part2Unlocked) {
-        messageHtml += `<br><br><span style="color: #28a745; font-weight: 600;">🎉 Step 2 is ready! Close this to see it!</span>`;
+        messageHtml += `<br><br><span style="color: #ff6b9d; font-weight: 600;">🎁 Part 2 unlocks at noon! (${timeLeft})</span>`;
+    } else if (day !== 8 && hasPart2 && part2Unlocked) {
+        messageHtml += `<br><br><span style="color: #28a745; font-weight: 600;">🎉 Part 2 is ready! Close this to see it!</span>`;
     }
     
     modalMessage.innerHTML = messageHtml;

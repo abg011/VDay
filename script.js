@@ -730,7 +730,9 @@ function openModal(day) {
         wheelWrap.style.display = 'block';
         wheelResult.textContent = '';
         const pickerWindow = document.getElementById('mall-picker-window');
+        const spotHint = document.getElementById('spot-picker-hint');
         if (pickerWindow) pickerWindow.textContent = '—';
+        if (spotHint) spotHint.textContent = VALENTINE_SPOTS.join(' • ');
         spinBtn.disabled = false;
         spinBtn.onclick = () => spinValentineWheel();
     } else {
@@ -845,14 +847,17 @@ function getTimeRemaining(targetDate) {
     return `${minutes}m`;
 }
 
-// Valentine's Day mall picker - slot-style, always lands on Bharatiya Mall of Bengaluru (index 0)
-const VALENTINE_MALLS = [
+// Valentine's Day spot picker - slot-style, always lands on the first item in the list below.
+// ─── Edit this list (script.js). First item = where the picker always stops. ───
+const VALENTINE_SPOTS = [
     'Bharatiya Mall of Bengaluru',
     'Orion Mall',
     'Phoenix Mall of Asia',
-    'Mantri Square Mall',
     'Forum Mall',
-    'Garuda Mall'
+    'Phoenix Marketcity',
+    'VR',
+    'Nexus Shantiniketan',
+    'UB City'
 ];
 
 function spinValentineWheel() {
@@ -868,14 +873,15 @@ function spinValentineWheel() {
     if (popup) popup.setAttribute('hidden', '');
 
     const targetIndex = 0;
-    const totalCycles = 2 * VALENTINE_MALLS.length + Math.floor(Math.random() * VALENTINE_MALLS.length);
+    const targetName = VALENTINE_SPOTS[targetIndex];
+    const totalCycles = 2 * VALENTINE_SPOTS.length + Math.floor(Math.random() * VALENTINE_SPOTS.length);
     let step = 0;
     const initialDelay = 90;
     const delayIncrement = 35;
 
     function tick() {
-        const index = step % VALENTINE_MALLS.length;
-        pickerWindow.textContent = VALENTINE_MALLS[index];
+        const index = step % VALENTINE_SPOTS.length;
+        pickerWindow.textContent = VALENTINE_SPOTS[index];
         pickerWindow.classList.add('mall-picker-tick');
         setTimeout(() => pickerWindow.classList.remove('mall-picker-tick'), 50);
         step++;
@@ -883,12 +889,12 @@ function spinValentineWheel() {
             const delay = initialDelay + step * delayIncrement;
             setTimeout(tick, Math.min(delay, 420));
         } else {
-            pickerWindow.textContent = VALENTINE_MALLS[targetIndex];
+            pickerWindow.textContent = targetName;
             playSound('reveal');
-            wheelResult.innerHTML = '🎉 <strong>Bharatiya Mall of Bengaluru!</strong><br>That\'s where we\'re getting the dress — then we head on for Step 2! 💕';
+            wheelResult.innerHTML = `🎉 <strong>${targetName}!</strong><br>That's where we're getting the dress — then we head on for Step 2! 💕`;
             spinBtn.disabled = false;
             if (popup && popupPlace) {
-                popupPlace.textContent = 'Bharatiya Mall of Bengaluru';
+                popupPlace.textContent = targetName;
                 popup.removeAttribute('hidden');
                 popup.setAttribute('aria-hidden', 'false');
             }

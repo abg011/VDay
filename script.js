@@ -260,7 +260,7 @@ const unlockDates = {
     4: new Date('2026-02-10T00:00:00'), // Teddy Day
     5: new Date('2026-02-11T00:00:00'), // Promise Day
     6: new Date('2026-02-12T00:00:00'), // Hug Day
-    7: new Date('2026-02-13T00:00:00'), // Kiss Day
+    7: new Date('2026-02-13T12:00:00'), // Kiss Day - unlocks at noon
     8: new Date('2026-02-14T00:00:00')  // Valentine's Day
 };
 

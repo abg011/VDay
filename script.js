@@ -866,7 +866,7 @@ function spinValentineWheel() {
 
     setTimeout(() => {
         playSound('reveal');
-        wheelResult.innerHTML = '🎉 <strong>Bharatiya Mall of Bengaluru!</strong><br>That\'s where we\'re getting the dress — and Step 2 is there too! 💕';
+        wheelResult.innerHTML = '🎉 <strong>Bharatiya Mall of Bengaluru!</strong><br>That\'s where we\'re getting the dress — then we head on for Step 2! 💕';
         spinBtn.disabled = false;
         if (popup && popupPlace) {
             popupPlace.textContent = 'Bharatiya Mall of Bengaluru';

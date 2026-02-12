@@ -885,11 +885,20 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 8px;
+    flex-wrap: wrap;
+    gap: 6px 8px;
     font-size: 0.85rem;
     color: #c44569;
     font-weight: 500;
     animation: pulse 2s ease-in-out infinite;
+    cursor: pointer;
+}
+
+.part2-timer-hint {
+    width: 100%;
+    font-size: 0.7rem;
+    color: rgba(196, 69, 105, 0.7);
+    font-weight: 400;
 }
 
 .part2-timer.unlocked {

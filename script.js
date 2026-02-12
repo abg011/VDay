@@ -277,6 +277,14 @@ const dateChoices = JSON.parse(localStorage.getItem('dateChoices')) || {};
 // Store scratched cards in localStorage
 const scratchedCards = JSON.parse(localStorage.getItem('scratchedCards')) || {};
 
+// Day 8: Step 2 timer only appears after spot picker has been spun
+function hasSpunSpotPickerDay8() {
+    return localStorage.getItem('spotPickedDay8') === 'true';
+}
+function setSpotPickedDay8() {
+    localStorage.setItem('spotPickedDay8', 'true');
+}
+
 // Initialize when DOM is loaded
 document.addEventListener('DOMContentLoaded', function() {
     if (document.querySelector('.cards-page')) {
@@ -333,12 +341,13 @@ function initializeCards() {
                 clearTimeout(part2ClickTimer);
                 part2ClickTimer = setTimeout(() => {
                     part2Clicks = 0;
-                }, 500);
+                }, 700);
                 
-                // Triple click - secret Part 2 unlock!
+                // Triple click - secret Part 2 unlock! (3 taps within 700ms)
                 if (part2Clicks >= 3) {
                     secretUnlockPart2(day);
                     part2Clicks = 0;
+                    e.preventDefault();
                     e.stopPropagation();
                 }
             });
@@ -497,9 +506,14 @@ function updatePart2Timer(day) {
         return;
     }
     
-    // Day 8: Step 2 is concert reveal (no date choice)
+    // Day 8: Step 2 is concert reveal — only show timer after they've spun the spot picker
     if (day === 8) {
+        if (!hasSpunSpotPickerDay8()) {
+            part2Timer.style.display = 'none';
+            return;
+        }
         part2Timer.style.display = 'flex';
+        const hint = '<span class="part2-timer-hint">(triple-tap here to unlock early)</span>';
         if (now >= part2Date) {
             part2Timer.classList.add('unlocked');
             part2Timer.innerHTML = part2Viewed[8]
@@ -509,7 +523,7 @@ function updatePart2Timer(day) {
         } else {
             part2Timer.classList.remove('unlocked');
             const timeLeft = getTimeRemaining(part2Date);
-            part2Timer.innerHTML = `<span class="timer-icon">🎁</span><span class="timer-text">Step 2 unlocks at 3 PM (${timeLeft})</span>`;
+            part2Timer.innerHTML = `<span class="timer-icon">🎁</span><span class="timer-text">Step 2 unlocks at 3 PM (${timeLeft})</span>${hint}`;
             part2Timer.onclick = null;
         }
         return;
@@ -951,6 +965,8 @@ function spinValentineWheel() {
             playSound('reveal');
             wheelResult.innerHTML = `🎉 <strong>${targetName}!</strong><br>That's where we're getting the dress — then we head on for Step 2! 💕`;
             spinBtn.disabled = false;
+            setSpotPickedDay8();
+            updatePart2Timer(8);
             if (popup && popupPlace) {
                 popupPlace.textContent = targetName;
                 popup.removeAttribute('hidden');
